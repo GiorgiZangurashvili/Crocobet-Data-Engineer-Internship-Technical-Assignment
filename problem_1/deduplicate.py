@@ -32,21 +32,23 @@ def deduplicate_dataset(input_filename: str, output_filename: str) -> None:
                 csv_writer.writerow(row)
 
 
-if len(sys.argv) != 2:
-    print("Usage: python deduplicate.py <output_filename>")
-    sys.exit(-1)
+if __name__ == "__main__":
+    output_filename = ""
+    if len(sys.argv) != 2:
+        output_filename = "out.csv"
+    else:
+        output_filename = sys.argv[1]
 
-print("Deduplication process started!")
+    print("Deduplication process started!")
 
-start_time = time.time()
+    start_time = time.time()
 
-output_filename = sys.argv[1]
-if not output_filename.endswith('.csv'):
-    output_filename += '.csv'
+    if not output_filename.endswith('.csv'):
+        output_filename += '.csv'
 
-deduplicate_dataset("steam-200k.csv", output_filename)
+    deduplicate_dataset("steam-200k.csv", output_filename)
 
-end_time = time.time()
+    end_time = time.time()
 
-print("Done!")
-print(f"Execution time: {end_time - start_time}")
+    print("Done!")
+    print(f"Execution time: {end_time - start_time}")
